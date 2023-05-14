@@ -721,6 +721,7 @@ def match(output):
     import os
     import cv2
     from torchvision import transforms
+    result = output
     output_w, output_h, _ = output.shape
     print(output_w, output_h)
     gt_list = os.listdir('./fig/pseudo_gt/')
