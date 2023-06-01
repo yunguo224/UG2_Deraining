@@ -17,7 +17,7 @@ sys.path.append(os.path.join(dir_name,'..'))
 import scipy.io as sio
 import utils
 import math
-from model import UNet,Uformer,match
+from model import UNet,Uformer
 from dataset.dataset_motiondeblur import *
 from skimage import img_as_float32, img_as_ubyte
 from skimage.metrics import peak_signal_noise_ratio as psnr_loss
@@ -148,8 +148,7 @@ with torch.no_grad():
         target_img = img_as_ubyte(target.data.cpu().numpy().squeeze().transpose((1, 2, 0)))
         input_img = img_as_ubyte(input_.data.cpu().numpy().squeeze().transpose((1, 2, 0)))
         visualization = np.concatenate([input_img, rgb_restored_img, target_img], axis=0)
-        restored_img = match(rgb_restored_img)
-        utils.save_img(os.path.join(args.result_dir, 'result/', filenames[0] + '.png'), restored_img)
+        utils.save_img(os.path.join(args.result_dir, 'result/', filenames[0] + '.png'), rgb_restored_img)
         utils.save_img(os.path.join(args.result_dir, 'visualization/', filenames[0] + '.png'), visualization)
 
 
